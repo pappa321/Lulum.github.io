@@ -2,52 +2,36 @@
 <html lang="hu">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Lulum Manager</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon-192x192.png" type="image/png">
   <link rel="apple-touch-icon" href="icon-192x192.png">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#121212">
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: #121212; color: #ffffff; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
-    .container { width: 100%; max-width: 480px; }
-    h1 { font-size: 1.8rem; margin-bottom: 20px; text-align: center; color: #95D5B2; }
-    .card { background-color: #1e1e1e; border-radius: 12px; padding: 20px; margin-bottom: 16px; border: 1px solid #2a2a2a; }
-    button { width: 100%; padding: 14px; background-color: #95D5B2; color: #121212; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
-    button:active { background-color: #74c496; }
-    #output { margin-top: 15px; font-size: 0.95rem; line-height: 1.5; color: #d1d1d1; word-break: break-word; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #121212;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Lulum Manager</h1>
-    
-    <div class="card">
-      <button onclick="fetchData()">Adatok betöltése</button>
-      <div id="output">Kattints a gombra az adatok lekéréséhez!</div>
-    </div>
-  </div>
+  <!-- IDE ILLESD BE A GOOGLE APPS SCRIPT WEB APP URL-EDET: -->
+  <iframe src="https://script.google.com/macros/s/AKfycbwlXkpKUS8CbP-vlaCrzBngq4Zpb9LilX_K_sinB1iuv0WK0Aw0kiYM8q33X-66tNvW/exec"></iframe>
 
   <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js');
-    }
-
-    // IDE ILLESD BE A SAJÁT GOOGLE APPS SCRIPT WEB APP URL-EDET:
-    const GAS_API_URL = "https://script.google.com/macros/s/AKfycbxhRZmauAin0TjNP-uDQihgQ6WjItzkaop4FszcWO85OdOrczlIUuPPO55-CZTjJKyh/exec";
-
-    async function fetchData() {
-      const output = document.getElementById('output');
-      output.innerText = "Betöltés...";
-      try {
-        const res = await fetch(GAS_API_URL);
-        const data = await res.json();
-        output.innerText = JSON.stringify(data, null, 2);
-      } catch (err) {
-        output.innerText = "Hiba történt a csatlakozás során: " + err.message;
-      }
     }
   </script>
 </body>
