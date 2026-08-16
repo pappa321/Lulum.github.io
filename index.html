@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lulum Manager</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#95D5B2">
+</head>
+<body>
+
+  <div id="app">
+    <h1>Lulum Manager</h1>
+    <button onclick="fetchData()">Adatok betöltése GAS-ból</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    // Service Worker regisztráció
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+
+    // A Google Apps Script Web App URL-ed
+    const GAS_API_URL = "https://script.google.com/macros/s/TET_GAS_DEPLOYMENT_ID/exec";
+
+    async function fetchData() {
+      try {
+        const res = await fetch(GAS_API_URL);
+        const data = await res.json();
+        document.getElementById('output').innerText = JSON.stringify(data);
+      } catch (err) {
+        console.error("Hiba a kérés során:", err);
+      }
+    }
+  </script>
+</body>
+</html>
