@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lulum-v5';
+const CACHE_NAME = 'lulum-v6';
 const ASSETS = [
   './',
   './index.html',
